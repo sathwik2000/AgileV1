@@ -1,0 +1,259 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+  <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+  <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+
+body {
+  font: 13px/1.3 'Lucida Grande', sans-serif;
+  color: #666;
+}
+.chart {
+  display: table;
+  table-layout: fixed;
+  width: 60%;
+  max-width: 700px;
+  height: 200px;
+  margin: 0 auto;
+  background-image: linear-gradient(bottom, rgba(0, 0, 0, 0.1) 2%, transparent 100%);
+  background-size: 100% 50px;
+  background-position: left top;
+}
+.chart li {
+  position: relative;
+  display: table-cell;
+  vertical-align: bottom;
+  height: 200px;
+}
+.chart span {
+  margin: 0 1em;
+  display: block;
+  background: red;
+  animation: draw 1s ease-in-out;
+}
+.chart span:before {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  padding: 5px 1em 0;
+  display: block;
+  text-align: center;
+  content: attr(title);
+  word-wrap: break-word;
+}
+.vericaltext {
+  width: 1px;
+  position: absolute;
+  word-wrap: break-word;
+  font-family: monospace;
+  /* this is just for good looks */
+}
+@keyframes draw {
+  0% {
+    height: 0;
+  }
+}
+.card{
+	border-radius: 50px;
+}
+.navbar-custom { 
+    background-color: #6596E0; 
+} 
+.navbar-custom .navbar-brand, 
+        .navbar-custom .navbar-text { 
+            color: white; 
+        } 
+</style>
+</head>
+<link rel="stylesheet" href="BarChartCSS.css"></link>
+<body>
+
+<nav class="navbar navbar-custom">
+  <!-- Navbar content -->
+  <span class="navbar-brand" style="float: right;margin-right: 30%;">Sales Report</span>
+
+  <a class="navbar-brand" href="#"> 
+          Menu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </a>
+  <a class="navbar-brand" href="#"> 
+  <svg height="19" width="19">
+  <circle cx="10" cy="10" r="9"  fill="red" />
+</svg>
+User Name
+  </a>
+</nav>
+<div id="container" >
+<div class="container align-center" style="padding-left:12%">
+Category:<select id="op1" class="class1" style="color:black;">
+<option>Food</option>
+<option>Phone</option>
+</select>
+&nbsp;&nbsp;&nbsp;
+Items:<select id="op2" class="class1" style="color:black;">
+<option>Veg</option>
+<option>Non-veg</option>
+</select>
+&nbsp;&nbsp;&nbsp;
+Brand:<select id="op3" style="color:black;">
+<option>Kwality Wall's</option>
+<option>Dunkin' Donuts</option>
+</select>
+</div>
+</div>
+ <!--<div class="row justify-content-center no-gutters mb-15 mb-lg-0 align-middle">
+                <div class="col-lg-16">
+                    <div class="bg-black text-center h-100">
+                        <div class="d-flex h-100">
+                            <div class=" w-100 my-auto text-center">
+							Category:<select id="op1" class="class1" style="color:black;">
+							<option>Food</option>
+							<option>Phone</option>
+							</select>
+							&nbsp;&nbsp;&nbsp;
+							Items:<select id="op2" class="class1" style="color:black;">
+							<option>Veg</option>
+                            <option>Non-veg</option>
+							</select>
+							&nbsp;&nbsp;&nbsp;
+							Brand:<select id="op3" style="color:black;">
+							<option>Kwality Wall's</option>
+                            <option>Dunkin' Donuts</option>
+							</select>
+							</br></br></br>
+                                <h4 class="text-white" id="title"></h4>
+                                <p class="mb-0">
+								 <div class="card text-center text-white bg-dark">
+								<div class="card-body">
+								</br>
+								<ul class="chart" id="graph">
+								<li>
+                                <span style='height:85%' title='moango'></span>
+                                </li>
+                                <li>
+                                <span style='height:75%' title='chocolate'></span>
+                                </li>
+                                <li>
+                                <span style='height:95%' title='vanilla'></span>
+                                </li>
+                                <li>
+                                <span style='height:55%' title='caramel'></span>
+                                </li>
+                                <li>
+                                <span style='height:65%' title='strawberry'></span>
+                                </li>
+								</ul>    
+								</div>
+								</div>
+								</p>
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+--><script>
+var d;
+jQuery(function($){
+	chart = anychart.column();
+	chart.title('Sales By Month for:');
+chart.xAxis().title('Months');
+chart.yAxis().title('Sales');
+d=anychart.data.set([{x: "January", value: 100}, {x: "February", value: 200},{x: "March", value: 300}, {x: "April", value: 400}
+ ]);
+  chart.addSeries(d);
+ chart.container("container").draw();
+	$("#op1").change(function(){
+		if($(this).val()=="Food"){
+		var s = "<option>Veg</option>\n<option>Non-veg</option>\n";
+		$("#op2").html(s);
+		var s1 = "<option>Kwality Wall's</option>\n<option>Dunkin' Donuts</option>\n";
+			$("#op3").html(s1);
+		}
+		else if($(this).val()=="Phone"){
+		var s = "<option>Touch</option>\n<option>Normal</option>\n";
+		$("#op2").html(s);
+		var s1 = "<option>Apple</option>\n<option>samsung</option>\n";
+			$("#op3").html(s1);
+		}
+		else{
+			var s = "<option>Veg</option>\n<option>Non-veg</option>\n";
+			$("#op2").html(s);
+			var s1 = "<option>Kwality Wall's</option>\n<option>Dunkin' Donuts</option>\n";
+			$("#op3").html(s1);
+			$("#title").html("");
+		}
+	});
+	$("#op2").change(function(){
+		if($(this).val()=="Veg"){
+		var s = "<option>Kwality Wall's</option>\n<option>Dunkin' Donuts</option>\n";
+		$("#op3").html(s);
+		}
+        else if($(this).val()=="Non-veg"){
+		var s = "<option>KFC</option>\n<option>Dominos</option>\n";
+		$("#op3").html(s);
+		}
+		else if($(this).val()=="Touch"){
+		var s = "<option>Apple</option>\n<option>samsung</option>\n";
+		$("#op3").html(s);
+		}
+		else if($(this).val()=="Normal"){
+		var s = "<option>Nokia</option>\n<option>samsung</option>\n";
+		$("#op3").html(s);
+		}
+		else{
+			var s = "<option>Kwality Wall's</option>\n";
+			$("#title").html("");
+			$("#op3").html(s);
+		}		
+	});
+	$("select").change(function(){
+         if($("#op3").val()=="Kwality Wall's"){
+			d=anychart.data.set([{x: "January", value: 100}, {x: "February", value: 200},{x: "March", value: 300}, {x: "April", value: 400}
+ ]);
+		}
+		else if($("#op3").val()=="Dunkin' Donuts"){
+			d=anychart.data.set([{x: "January", value: 70}, {x: "February", value: 500},{x: "March", value: 400}, {x: "April", value: 200}
+ ]);
+		}
+		else if($("#op3").val()=="KFC"){
+			d=anychart.data.set([{x: "January", value: 600}, {x: "February", value: 100},{x: "March", value: 600}, {x: "April", value: 700}
+ ]);
+		}
+		else if($("#op3").val()=="Dominos"){
+			d=anychart.data.set([{x: "January", value: 200}, {x: "February", value: 300},{x: "March", value: 150}, {x: "April", value: 450}
+ ]);
+		}
+		else if($("#op3").val()=="Apple"){
+			 d=anychart.data.set([{x: "January", value: 300}, {x: "February", value: 500},{x: "March", value: 500}, {x: "April", value: 100}
+ ]);
+		}
+		else if($("#op3").val()=="samsung" && $("#op2").val()=="Touch"){
+			d=anychart.data.set([{x: "January", value: 200}, {x: "February", value: 250},{x: "March", value: 350}, {x: "April", value: 450}
+ ]);
+		}
+		else if($("#op3").val()=="Nokia"){
+			d=anychart.data.set([{x: "January", value: 170}, {x: "February", value: 270},{x: "March", value: 300}, {x: "April", value: 400}
+ ]);
+		}
+		else if($("#op3").val()=="samsung"){
+			d=anychart.data.set([{x: "January", value: 500}, {x: "February", value: 400},{x: "March", value: 300}, {x: "April", value: 200}
+ ]);
+		}
+		 data = d;
+ chart.removeAllSeries();
+ chart.addSeries(data);
+ chart.container("container").draw();  
+	});
+});
+</script>
+</body>
+</html>
